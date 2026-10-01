@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro recebido — AjatMed</title>
+  <meta name="description" content="Seu cadastro AjatMed foi recebido. Conclua o pagamento para ativar sua telemedicina.">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="brand" id="brandWrap">
+      <img src="/logo.png" alt="AjatMed — saúde mais perto de você" onerror="document.getElementById('brandWrap').classList.add('no-logo')">
+      <span class="brand-fallback"><strong>AjatMed</strong><span>Telemedicina</span></span>
+    </span>
+  </div>
+</header>
+
+<div class="success-wrap">
+  <div class="success-card">
+    <div class="card-hairline" aria-hidden="true"></div>
+    <div style="padding-top: 40px;">
+      <div class="ok" role="img" aria-label="Cadastro recebido com sucesso">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <h1>Cadastro recebido, <%= nome %>!</h1>
+      <p>Enviamos a confirmação para <strong><%= email %></strong>.</p>
+      <% if (paymentUrl) { %>
+        <p>Clique abaixo para concluir o pagamento com segurança via <strong>Asaas</strong> (Pix, cartão ou boleto):</p>
+      <% } else { %>
+        <p>Em instantes você receberá o link de pagamento por e-mail.</p>
+      <% } %>
+      <div class="next-steps">
+        <div><span class="n">1</span><span>Conclua o pagamento com segurança pelo Asaas.</span></div>
+        <div><span class="n">2</span><span>Aguarde a confirmação do pagamento.</span></div>
+        <div><span class="n">3</span><span>Faremos seu cadastro na telemedicina em até 48h.</span></div>
+      </div>
+      <% if (paymentUrl) { %>
+        <div class="btn-row">
+          <a class="btn btn-pay" style="margin-top:0" href="<%= paymentUrl %>" target="_blank" rel="noopener">Pagar agora</a>
+          <a class="link-back" href="/">← Voltar ao início</a>
+        </div>
+      <% } %>
+      <div class="note48" style="text-align: left;">⏱️ Os cadastros serão feitos manualmente no sistema de telemedicina com prazo máximo de 48h após a confirmação do pagamento.</div>
+      <p class="secure-line">🔒 Pagamento criptografado SSL 256-bit via <strong>Asaas</strong>, instituição de pagamento autorizada pelo Banco Central.</p>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/logo.png" alt="AjatMed" onerror="this.remove()">
+      <p><strong>AjatMed Telemedicina</strong> · Conformidade CFM/CRM</p>
+    </div>
+    <ul class="trust-row" aria-label="Selos de segurança e conformidade">
+      <li>SSL 256-bit</li>
+      <li>Asaas</li>
+      <li>LGPD</li>
+      <li>CFM</li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>
