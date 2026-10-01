@@ -237,6 +237,13 @@ $('form').addEventListener('submit', (e) => {
   if (!ok) {
     e.preventDefault();
     showStep(!okStep0 ? 0 : 1);
+    return;
+  }
+  const btn = e.target.querySelector('[type="submit"]');
+  if (btn) {
+    btn.disabled = true;
+    btn.dataset.label = btn.innerHTML;
+    btn.innerHTML = 'Enviando…';
   }
 });
 
