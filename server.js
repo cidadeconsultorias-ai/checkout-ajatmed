@@ -211,6 +211,10 @@ function mapAsaasStatus(event, paymentStatus) {
   return null;
 }
 
-app.listen(PORT, () => {
-  console.log(`Checkout Ajatmed rodando em http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Checkout Ajatmed rodando em http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
