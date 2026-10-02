@@ -260,12 +260,13 @@
           </div>
         </div>
         <div class="summary-lines">
-          <div class="line"><span>Mensalidade</span><strong>R$ <%= typeof planValueFmt !== 'undefined' ? planValueFmt : '59,77' %></strong></div>
+          <div class="line"><span>Mensalidade (titular)</span><strong>R$ <%= typeof planValueFmt !== 'undefined' ? planValueFmt : '59,77' %></strong></div>
+          <div class="line" id="depLine" style="display:none;"><span>Dependentes (<span id="depCount">0</span> × R$ 10,00)</span><strong id="depTotal">R$ 0,00</strong></div>
           <div class="line free"><span>Taxa de adesão</span><span>Grátis</span></div>
           <div class="line free"><span>Carência · Clínico geral</span><span>Zero</span></div>
           <div class="summary-total">
             <span class="t-label">Total mensal</span>
-            <span class="t-value">R$ <%= typeof planValueFmt !== 'undefined' ? planValueFmt : '59,77' %></span>
+            <span class="t-value" id="summaryTotal">R$ <%= typeof planValueFmt !== 'undefined' ? planValueFmt : '59,77' %></span>
           </div>
         </div>
         <div class="summary-included">

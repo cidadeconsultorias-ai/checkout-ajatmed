@@ -127,6 +127,11 @@ app.post('/submit', async (req, res) => {
       cadastroId = data && data.id;
     }
 
+    // Calcula valor: base + R$ 10 por dependente
+    const dependenteCount = dependentes.length;
+    const DEPENDENTE_VALOR = 10.00;
+    const valorTotal = Number(process.env.PLAN_VALUE || 59.77) + dependenteCount * DEPENDENTE_VALOR;
+
     // Cria cliente + cobrança no Asaas
     let paymentUrl = process.env.ASAAS_CHECKOUT_URL || null;
     if (ASAAS_API_KEY) {
@@ -148,10 +153,10 @@ app.post('/submit', async (req, res) => {
       const dueDate = new Date(Date.now() + 3 * 24 * 3600 * 1000).toISOString().slice(0, 10);
       const payment = await asaasRequest('/payments', 'POST', {
         customer: customer.id,
-        billingType: 'UNDEFINED', // cliente escolhe (pix/cartão/boleto) no checkout do Asaas
-        value: Number(process.env.PLAN_VALUE || 49.9),
+        billingType: 'UNDEFINED',
+        value: valorTotal,
         dueDate,
-        description: `Ajatmed - Adesão ${f.nomeCompleto}`,
+        description: `Ajatmed - Adesão ${f.nomeCompleto}${dependenteCount ? ` + ${dependenteCount} dependente(s)` : ''}`,
         externalReference: cadastroId ? String(cadastroId) : undefined,
       });
 

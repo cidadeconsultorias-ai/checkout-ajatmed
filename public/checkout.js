@@ -76,7 +76,7 @@ function depBlock() {
       <div class="field span-6"><label>CPF (opcional)</label><input data-k="cpf" class="mono" placeholder="000.000.000-00"></div>
     </div>
     <button type="button" class="btn btn-danger">Remover</button>`;
-  div.querySelector('.btn-danger').onclick = () => div.remove();
+  div.querySelector('.btn-danger').onclick = () => { div.remove(); updateSummary(); };
   return div;
 }
 function petBlock() {
@@ -91,8 +91,24 @@ function petBlock() {
   div.querySelector('.btn-danger').onclick = () => div.remove();
   return div;
 }
-$('addDep').onclick = () => $('deps').appendChild(depBlock());
+$('addDep').onclick = () => { $('deps').appendChild(depBlock()); updateSummary(); };
 $('addPet').onclick = () => $('pets').appendChild(petBlock());
+
+function updateSummary() {
+  const count = collect('deps').length;
+  const base = Number('<%= typeof planValue !== "undefined" ? planValue : 59.77 %>');
+  const total = base + count * 10.00;
+  const depLine = $('depLine');
+  const depCount = $('depCount');
+  const depTotal = $('depTotal');
+  const summaryTotal = $('summaryTotal');
+  if (depLine && depCount && depTotal && summaryTotal) {
+    depLine.style.display = count > 0 ? 'flex' : 'none';
+    depCount.textContent = count;
+    depTotal.textContent = 'R$ ' + (count * 10.00).toFixed(2).replace('.', ',');
+    summaryTotal.textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+  }
+}
 
 function collect(containerId) {
   return [...document.querySelectorAll('#' + containerId + ' .item')].map((el) => {
