@@ -96,7 +96,8 @@ $('addPet').onclick = () => $('pets').appendChild(petBlock());
 
 function updateSummary() {
   const count = collect('deps').length;
-  const base = Number('<%= typeof planValue !== "undefined" ? planValue : 59.77 %>');
+  const baseText = $('summaryTotal')?.textContent || 'R$ 59,77';
+  const base = Number(baseText.replace('R$', '').replace(',', '.').trim());
   const total = base + count * 10.00;
   const depLine = $('depLine');
   const depCount = $('depCount');
